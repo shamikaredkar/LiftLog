@@ -59,6 +59,7 @@ export default function Generator() {
           return (
             <button
               onClick={() => {
+                setMuscles([]);
                 setPoison(type);
               }}
               className={
@@ -89,7 +90,9 @@ export default function Generator() {
             onClick={toggleModal}
             className=' p-3 relative items-center justify-center'
           >
-            <p>Select Muscle Groups</p>{" "}
+            <p className='uppercase'>
+              {muscles.length == 0 ? "Select Muscle Groups" : muscles.join(" ")}
+            </p>{" "}
             <i className='fa-solid fa-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 '></i>
           </button>
           {showmodal && (
