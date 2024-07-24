@@ -13,7 +13,7 @@ function App() {
   function updateWorkout() {
     if (muscles.length < 1) {
     }
-    let newWorkout = generateWorkout(poison, muscles, goals);
+    let newWorkout = generateWorkout({ poison, muscles, goals });
     setWorkout(newWorkout);
   }
   return (
