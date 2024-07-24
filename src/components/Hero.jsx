@@ -1,5 +1,6 @@
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
+import Button from "./button";
 
 export default function Hero() {
   const [typeEffect] = useTypewriter({
@@ -31,12 +32,7 @@ export default function Hero() {
         </span>{" "}
         and always remember that sweat is just my fat crying . Lift on!
       </p>
-      <button
-        className='px-8  py-4 rounded-md border-[2px] border-red-900 border-solid darkRedShadow duration-200'
-        style={{ backgroundColor: "#1F0021" }}
-      >
-        <p>Accept & Begin</p>
-      </button>
+      <Button text={"Accept & Begin"} />
     </div>
   );
 }
