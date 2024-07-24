@@ -26,6 +26,7 @@ export default function Generator({
   setMuscles,
   goals,
   setGoals,
+  updateWorkout,
 }) {
   const [showmodal, setShowModal] = useState(false);
   function toggleModal() {
@@ -132,7 +133,7 @@ export default function Generator({
             "Set your ultimate objective and kick start your journey"
           }
         />
-        <div className='grid grid-cols-3 gap-4 p-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 p-4'>
           {Object.keys(SCHEMES).map((scheme, index) => {
             return (
               <button
@@ -155,7 +156,7 @@ export default function Generator({
         </div>
       </SectionWrapper>
       <div className='flex justify-center py-4'>
-        <Button text={"Formulate"} />
+        <Button func={updateWorkout} text={"Formulate"} />
       </div>
     </>
   );
