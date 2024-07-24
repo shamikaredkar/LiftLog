@@ -19,3 +19,11 @@ span {
   transform: translate(-3px, -3px);
   box-shadow: 7px 7px 0 0 #BF554B;
 }
+.darkRedShadow {
+  box-shadow: 3px 3px 0 0 #742a2a;
+}
+
+.darkRedShadow:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 #742a2a;
+}
