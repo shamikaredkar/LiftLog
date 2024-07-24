@@ -5,3 +5,17 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+
+span {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.redShadow {
+  box-shadow: 3px 3px 0 0 #BF554B;
+}
+
+.redShadow:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 #BF554B;
+}

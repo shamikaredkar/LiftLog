@@ -7,7 +7,7 @@ function App() {
   return (
     <main
       style={{
-        backgroundImage: "linear-gradient(to bottom, #1F0021 40%, #751006)",
+        backgroundImage: "linear-gradient(to bottom, #1F0021 50%, #751006)",
       }}
       className='min-h-screen flex flex-col text-[#FDFFFC] text-sm sm:text-base'
     >
