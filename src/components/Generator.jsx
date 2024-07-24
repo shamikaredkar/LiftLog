@@ -90,7 +90,7 @@ export default function Generator({
         />
         <div className='flex justify-center'>
           <div
-            className='flex flex-col m-2 bg-red-950 border border-solid border-red-300 rounded-lg w-5/12'
+            className='flex flex-col m-2 bg-red-950 border border-solid border-red-400 rounded-lg w-5/12'
             style={{ backgroundColor: "#1F0021" }}
           >
             <button
@@ -112,7 +112,7 @@ export default function Generator({
                 ).map((muscleGroup, index) => (
                   <button
                     onClick={() => updateMuscles(muscleGroup)}
-                    className={`hover:text-red-300 hover:duration-200 hover:border hover:border-solid hover:border-white ${
+                    className={`hover:text-red-400 hover:duration-200 hover:border hover:border-solid hover:border-white ${
                       muscles.includes(muscleGroup) ? "text-red-300" : ""
                     }`}
                     key={index}
