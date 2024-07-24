@@ -1,6 +1,6 @@
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
-import Button from "./button";
+import Button from "./Button";
 
 export default function Hero() {
   const [typeEffect] = useTypewriter({
@@ -13,7 +13,7 @@ export default function Hero() {
     <div className='min-h-screen flex flex-col gap-10 items-center justify-center text-center max-w-[800px] w-full mx-auto p-4'>
       <div className='flex flex-col gap-4'>
         <p>IT'S TIME TO GET</p>
-        <h1 className='uppercase font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl'>
+        <h1 className='uppercase font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl'>
           <span>{typeEffect}</span>
         </h1>
       </div>
