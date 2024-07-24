@@ -47,11 +47,12 @@ export default function Generator() {
         title={"Target Your Muscles"}
         description={"Select the muscle groups you want to work on today."}
       />
-      <div className='p-3  bg-red-950 border border-solid border-red-300 rounded-lg'>
-        <div>
-          <p className='relative flex items-center justify-center'>
-            Select Muscle Groups
-          </p>{" "}
+      <div
+        className='p-3 m-2  bg-red-950 border border-solid border-red-300 rounded-lg'
+        style={{ backgroundColor: "#1F0021" }}
+      >
+        <div className='relative flex items-center justify-center'>
+          <p>Select Muscle Groups</p>{" "}
           <i className='fa-solid fa-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 '></i>
         </div>
       </div>
