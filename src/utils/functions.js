@@ -2,7 +2,7 @@ import { EXERCISES, SCHEMES, TEMPOS, WORKOUTS } from "./workouts"
 const exercises = exercisesFlattener(EXERCISES)
 
 export function generateWorkout(args) {
-    const { muscles, poison: workout, goal } = args
+    const { muscles, poison: workout, goals } = args
     let exer = Object.keys(exercises);
     exer = exer.filter((key) => exercises[key].meta.environment !== "home");
     let includedTracker = [];
@@ -17,7 +17,7 @@ export function generateWorkout(args) {
 
     listOfMuscles = new Set(shuffleArray(listOfMuscles));
     let arrOfMuscles = Array.from(listOfMuscles);
-    let scheme = goal
+    let scheme = goals
     let sets = SCHEMES[scheme].ratio
         .reduce((acc, curr, index) => {
             //make this compound and exercise muscle -> array of objects and destructure in loop
