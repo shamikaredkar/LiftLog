@@ -20,7 +20,13 @@ function App() {
     let newWorkout = generateWorkout({ poison, muscles, goals });
     setWorkout(newWorkout);
 
-    window.location.href = "#workout";
+    // Scroll to the workout section after setting the workout
+    setTimeout(() => {
+      const workoutSection = document.getElementById("workout");
+      if (workoutSection) {
+        workoutSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 0);
   }
 
   return (
