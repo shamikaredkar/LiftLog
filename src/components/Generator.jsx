@@ -53,6 +53,7 @@ export default function Generator({
   return (
     <>
       <SectionWrapper
+        id={"generate"}
         header={"Generate Your Workout"}
         title={["There's", "No", "Tomorrow.", "Start", "Today!"]}
       >
