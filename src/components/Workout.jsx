@@ -4,16 +4,18 @@ import ExerciseCard from "./ExerciseCard";
 
 export default function Workout({ workout }) {
   return (
-    <SectionWrapper
-      id={"workout"}
-      header={"Welcome"}
-      title={["The", "DANGER", "Zone!"]}
-    >
-      <div className='flex flex-col gap-4'>
-        {workout.map((exercise, index) => (
-          <ExerciseCard index={index} exercise={exercise} key={index} />
-        ))}
-      </div>
-    </SectionWrapper>
+    <div className='py-10 my-10'>
+      <SectionWrapper
+        id={"workout"}
+        header={"Welcome"}
+        title={["The", "DANGER", "Zone!"]}
+      >
+        <div className='flex flex-col gap-4'>
+          {workout.map((exercise, index) => (
+            <ExerciseCard index={index} exercise={exercise} key={index} />
+          ))}
+        </div>
+      </SectionWrapper>
+    </div>
   );
 }

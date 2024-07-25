@@ -156,7 +156,7 @@ export default function Generator({
           })}
         </div>
       </SectionWrapper>
-      <div className='flex justify-center py-4'>
+      <div className='flex justify-center py-32 my-auto mx-auto'>
         <Button func={updateWorkout} text={"Formulate"} />
       </div>
     </>

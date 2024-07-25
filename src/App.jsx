@@ -36,7 +36,9 @@ function App() {
         setGoals={setGoals}
         updateWorkout={updateWorkout}
       />
-      {workout && <Workout workout={workout} />}
+      <div className='mt-16 pt-32'>
+        {workout && <Workout workout={workout} />}
+      </div>
     </main>
   );
 }
