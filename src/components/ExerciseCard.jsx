@@ -55,6 +55,35 @@ export default function ExerciseCard({ exercise, index }) {
           <h3 className='text-red-400 text-sm capitalize'>{setsCompleted}/5</h3>
         </button>
       </div>
+      {exercise.variants && (
+        <div className='flex flex-col rounded gap-2 mt-4'>
+          <h3 className='text-red-200 text-sm font-semibold'>Variants</h3>
+          {Object.entries(exercise.variants).map(
+            ([variant, description], idx) => (
+              <div key={idx} className='text-sm'>
+                <details>
+                  <summary>
+                    {" "}
+                    <em className='capitalize'>
+                      {variant.replaceAll("_", " ")}:{" "}
+                    </em>
+                  </summary>
+
+                  {description}
+                </details>
+              </div>
+            )
+          )}
+        </div>
+      )}
+      {exercise.substitutes && (
+        <div className='flex flex-col rounded gap-2 mt-4'>
+          <h3 className='text-red-200 text-sm'>Substitutes</h3>
+          <p className='capitalize'>
+            {exercise.substitutes.join(",  ").replaceAll("_", " ")}
+          </p>
+        </div>
+      )}
       <Tooltip anchorSelect='.tooltip-reps' place='top'>
         Reps: The number of times you perform a specific exercise.
       </Tooltip>
