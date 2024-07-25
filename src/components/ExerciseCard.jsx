@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 export default function ExerciseCard({ exercise, index }) {
   const [setsCompleted, setSetsCompleted] = useState(0);
@@ -17,6 +19,7 @@ export default function ExerciseCard({ exercise, index }) {
         <h2 className='capitalize whitespace-nowrap truncate max-w-full text-lg sm:text-xl md:text-2xl flex-1 sm:text-center'>
           {exercise.name.replaceAll("_", " ")}
         </h2>
+
         <p className='text-sm text-red-400 capitalize font-semibold'>
           {exercise.type}
         </p>
@@ -33,21 +36,34 @@ export default function ExerciseCard({ exercise, index }) {
       <div className='grid grid-cols-2 sm:gri-cols-4 sm:place-items-center gap-2'>
         {["reps", "rest", "tempo"].map((info) => {
           return (
-            <div className='flex flex-col p-2 rounded border-[1.5px] border-solid border-red-900 w-full'>
+            <div
+              className={`flex flex-col p-2 rounded border-[1.5px] border-solid border-red-900 w-full`}
+            >
               <h3 className='capitalize text-white text-sm'>
-                {info === "reps" ? `${exercise.unit}` : info}
+                <a className={`tooltip-${info}`}>
+                  {info === "reps" ? `${exercise.unit}` : info}
+                </a>
               </h3>
-              <p className='font-medium '>{exercise[info]}</p>
+              <p className='font-medium'>{exercise[info]}</p>
             </div>
           );
         })}
         <button
           onClick={handleSetIncrement}
-          className='flex flex-col p-2 rounded border-[1.5px] duration-200 border-solid border-red-900 hover:border-red-400 w-full duration-200'
+          className='flex flex-col p-5 rounded border-[1.5px] duration-200 border-solid border-red-900 hover:border-red-400 w-full duration-200'
         >
           <h3 className='text-red-400 text-sm capitalize'>{setsCompleted}/5</h3>
         </button>
       </div>
+      <Tooltip anchorSelect='.tooltip-reps' place='top'>
+        Reps: The number of times you perform a specific exercise.
+      </Tooltip>
+      <Tooltip anchorSelect='.tooltip-rest' place='top'>
+        Rest: The amount of time(seconds) you rest between sets.
+      </Tooltip>
+      <Tooltip anchorSelect='.tooltip-tempo' place='top'>
+        Tempo: The speed at which you perform each rep of an exercise.
+      </Tooltip>
     </div>
   );
 }
