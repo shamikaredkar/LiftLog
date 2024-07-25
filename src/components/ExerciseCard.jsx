@@ -39,11 +39,11 @@ export default function ExerciseCard({ exercise, index }) {
             <div
               className={`flex flex-col p-2 rounded border-[1.5px] border-solid border-red-900 w-full`}
             >
-              <h3 className='capitalize text-white text-sm'>
-                <a className={`tooltip-${info}`}>
+              <a className={`tooltip-${info}`}>
+                <h3 className='capitalize text-white text-sm'>
                   {info === "reps" ? `${exercise.unit}` : info}
-                </a>
-              </h3>
+                </h3>
+              </a>
               <p className='font-medium'>{exercise[info]}</p>
             </div>
           );
