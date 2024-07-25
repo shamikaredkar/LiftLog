@@ -33,8 +33,9 @@ export default function Hero() {
         and always remember that sweat is just my fat crying . Lift on!
       </p>
       <button
-        className='px-8  py-4 rounded-md border-[2px] border-red-400 border-solid redShadow duration-200'
+        className='px-8 py-4 rounded-md border-[2px] border-red-400 border-solid redShadow duration-200'
         style={{ backgroundColor: "#1F0021" }}
+        onClick={() => (window.location.href = "#generate")}
       >
         <p>Accept & Begin</p>
       </button>
