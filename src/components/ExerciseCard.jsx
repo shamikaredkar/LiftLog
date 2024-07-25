@@ -37,7 +37,7 @@ export default function ExerciseCard({ exercise, index }) {
               <h3 className='capitalize text-white text-sm'>
                 {info === "reps" ? `${exercise.unit}` : info}
               </h3>
-              <p className='font-medium '></p>
+              <p className='font-medium '>{exercise[info]}</p>
             </div>
           );
         })}
