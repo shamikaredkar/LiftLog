@@ -32,7 +32,12 @@ export default function Hero() {
         </span>{" "}
         and always remember that sweat is just my fat crying . Lift on!
       </p>
-      <Button text={"Accept & Begin"} />
+      <Button
+        func={() => {
+          window.location.href = "#generate";
+        }}
+        text={"Accept & Begin"}
+      />
     </div>
   );
 }

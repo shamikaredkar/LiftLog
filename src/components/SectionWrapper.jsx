@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function ({ children, header, title }) {
+export default function ({ children, header, title, id }) {
   return (
     <>
-      <section className='min-h-screen flex flex-col gap-10'>
+      <section id={id} className='min-h-screen flex flex-col gap-10'>
         <div className='py-10 flex flex-col gap-4 justify-center items-center p-4'>
           <p className='uppercase font-semibold'>{header}</p>
           <h2 className=' glow uppercase font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>
