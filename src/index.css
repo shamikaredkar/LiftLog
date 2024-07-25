@@ -32,3 +32,16 @@ span {
   box-shadow: 7px 7px 0 0 #742a2a;
 }
 
+.substitutes-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.substitute-item {
+  flex: 1 1 20%;
+  /* This ensures 5 columns */
+  min-width: 20%;
+  /* Ensure the width is at least 20% */
+  box-sizing: border-box;
+}
+

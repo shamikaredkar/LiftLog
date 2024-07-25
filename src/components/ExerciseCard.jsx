@@ -65,7 +65,7 @@ export default function ExerciseCard({ exercise, index }) {
                   <summary>
                     {" "}
                     <em className='capitalize'>
-                      {variant.replaceAll("_", " ")}:{" "}
+                      {variant.replaceAll("_", " ")} :{" "}
                     </em>
                   </summary>
 
@@ -80,10 +80,26 @@ export default function ExerciseCard({ exercise, index }) {
         <div className='flex flex-col rounded gap-2 mt-4'>
           <h3 className='text-red-200 text-sm'>Substitutes</h3>
           <p className='capitalize'>
-            {exercise.substitutes.join(",  ").replaceAll("_", " ")}
+            {exercise.substitutes
+              .map((substitute) =>
+                String(substitute).replace(/_/g, " ").replace(/,/g, " | ")
+              )
+              .join(" | ")
+              .split(" | ")
+              .reduce(
+                (acc, current, index, array) => (
+                  <>
+                    {acc}
+                    {index > 0 && <span className='text-red-300'> | </span>}
+                    {current}
+                  </>
+                ),
+                null
+              )}
           </p>
         </div>
       )}
+
       <Tooltip anchorSelect='.tooltip-reps' place='top'>
         Reps: The number of times you perform a specific exercise.
       </Tooltip>
