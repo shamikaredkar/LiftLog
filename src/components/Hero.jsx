@@ -32,12 +32,12 @@ export default function Hero() {
         </span>{" "}
         and always remember that sweat is just my fat crying . Lift on!
       </p>
-      <Button
-        func={() => {
-          window.location.href = "#generate";
-        }}
-        text={"Accept & Begin"}
-      />
+      <button
+        className='px-8  py-4 rounded-md border-[2px] border-red-400 border-solid redShadow duration-200'
+        style={{ backgroundColor: "#1F0021" }}
+      >
+        <p>Accept & Begin</p>
+      </button>
     </div>
   );
 }
