@@ -5,7 +5,7 @@ export default function Navbar() {
     <header
       class='flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3'
       style={{
-        backgroundImage: "#1F0021",
+        backgroundColor: "#1F0021",
       }}
     >
       <nav class='max-w-[85rem] w-full mx-3 sm:flex sm:items-center sm:justify-between'>
