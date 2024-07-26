@@ -5,6 +5,7 @@ import Workout from "./components/Workout";
 import ErrorModal from "./components/ErrorModal"; // Import ErrorModal
 import { generateWorkout } from "./utils/functions";
 import Navbar from "./components/Navbar";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   const [workout, setWorkout] = useState(null);
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <main
         style={{
           backgroundImage: "linear-gradient(to bottom, #1F0021 50%, #751006)",
@@ -65,7 +66,8 @@ function App() {
             </div>
           </div>
         )}
-      </main>
+      </main> */}
+      <Chatbot />
     </>
   );
 }
