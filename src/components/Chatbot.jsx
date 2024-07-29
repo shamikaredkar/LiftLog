@@ -83,7 +83,7 @@ export default function Chatbot() {
         Chat
       </button>
       {isOpen && (
-        <div className='bg-white border border-gray-300 rounded-lg w-80 h-96 shadow-lg flex flex-col absolute bottom-20 right-0'>
+        <div className='bg-white border border-gray-300 rounded-lg w-96 h-96 shadow-lg flex flex-col absolute bottom-20 right-0'>
           <section className='p-4 flex-1 flex flex-col overflow-hidden'>
             <p className='mb-2'>
               Hello! I'm your Fitness Assistant, my name is GymBro. How can I

@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      {/* <Navbar />
+      <Navbar />
       <main
         style={{
           backgroundImage: "linear-gradient(to bottom, #1F0021 50%, #751006)",
@@ -66,7 +66,7 @@ function App() {
             </div>
           </div>
         )}
-      </main> */}
+      </main>
       <Chatbot />
     </>
   );
