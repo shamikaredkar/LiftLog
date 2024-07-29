@@ -5,6 +5,7 @@ export default function Chatbot() {
   const [value, setValue] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef(null);
 
   const surpriseOptions = [
@@ -31,8 +32,10 @@ export default function Chatbot() {
     setChatHistory((oldChatHistory) => [
       ...oldChatHistory,
       { role: "user", parts: value },
+      { role: "model", parts: "GymBro is thinking..." },
     ]);
     setValue("");
+    setLoading(true);
 
     try {
       const options = {
@@ -51,9 +54,9 @@ export default function Chatbot() {
       if (data.candidates && data.candidates.length > 0) {
         const generatedText = data.candidates[0].content.parts[0].text;
 
-        // Update chat history with AI response
+        // Replace loading message with AI response
         setChatHistory((oldChatHistory) => [
-          ...oldChatHistory,
+          ...oldChatHistory.slice(0, -1),
           { role: "model", parts: generatedText },
         ]);
       } else {
@@ -61,6 +64,8 @@ export default function Chatbot() {
       }
     } catch (e) {
       setError("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -113,6 +118,7 @@ export default function Chatbot() {
                 <button
                   className='ml-2 px-4 py-2 bg-blue-500 text-white rounded'
                   onClick={getResponse}
+                  disabled={loading}
                 >
                   Ask Me
                 </button>
