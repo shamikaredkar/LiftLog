@@ -26,6 +26,14 @@ export default function Chatbot() {
       setError("Error! Please ask a question");
       return;
     }
+
+    // Update chat history with user message
+    setChatHistory((oldChatHistory) => [
+      ...oldChatHistory,
+      { role: "user", parts: value },
+    ]);
+    setValue("");
+
     try {
       const options = {
         method: "POST",
@@ -43,12 +51,11 @@ export default function Chatbot() {
       if (data.candidates && data.candidates.length > 0) {
         const generatedText = data.candidates[0].content.parts[0].text;
 
+        // Update chat history with AI response
         setChatHistory((oldChatHistory) => [
           ...oldChatHistory,
-          { role: "user", parts: value },
           { role: "model", parts: generatedText },
         ]);
-        setValue("");
       } else {
         setError("No response from the model.");
       }
@@ -83,7 +90,7 @@ export default function Chatbot() {
         Chat
       </button>
       {isOpen && (
-        <div className='bg-white border border-gray-300 rounded-lg w-96 h-96 shadow-lg flex flex-col absolute bottom-20 right-0'>
+        <div className='bg-white border border-gray-300 rounded-lg w-80 h-96 shadow-lg flex flex-col absolute bottom-20 right-0'>
           <section className='p-4 flex-1 flex flex-col overflow-hidden'>
             <p className='mb-2'>
               Hello! I'm your Fitness Assistant, my name is GymBro. How can I
@@ -122,7 +129,7 @@ export default function Chatbot() {
             {error && <p className='text-red-500 mt-2'>{error}</p>}
             <div
               className='flex-1 overflow-y-auto mt-4'
-              style={{ maxHeight: "calc(100% - 150px)" }}
+              style={{ maxHeight: "calc(100% - 60px)" }}
               ref={chatContainerRef}
             >
               {chatHistory.map((chatItem, index) => (
