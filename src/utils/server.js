@@ -3,7 +3,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env')}); // Load environment variables from .env.local
-console.log(dotenv.config({ path: path.resolve(__dirname, '../../.env') }))
+console.log(dotenv.config({ path: path.resolve(__dirname, '../../.env') }));
+
 const express = require('express');
 const cors = require('cors');
 
@@ -15,19 +16,50 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const initialInstructions = `
+You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
+`;
+
+const isHealthOrFitnessRelated = (message) => {
+  const healthAndFitnessKeywords = [
+    'workout', 'exercise', 'fitness', 'nutrition', 'diet', 'health', 'gym', 'training', 'muscle', 'calories', 'meal plan', 'strength', 'cardio', 'wellness'
+  ];
+  return healthAndFitnessKeywords.some(keyword => message.toLowerCase().includes(keyword));
+};
+
 app.post('/gemini', async (req, res) => {
   try {
     const { history, message } = req.body;
 
-    // Construct the contents array with full history
-    const contents = history.map(item => ({
-      role: item.role,
-      parts: [{ text: item.parts }],
-    }));
-    contents.push({ role: 'user', parts: [{ text: message }] });
+    if (!isHealthOrFitnessRelated(message)) {
+      return res.json({
+        candidates: [{
+          content: {
+            parts: [{
+              text: "I'm sorry, I can only answer questions related to health and fitness. Please ask me something about workouts, nutrition, or general fitness."
+            }]
+          }
+        }]
+      });
+    }
+
+    const contents = [
+      {
+        role: 'system',
+        parts: [{ text: initialInstructions }]
+      },
+      ...history.map(item => ({
+        role: item.role,
+        parts: [{ text: item.parts }],
+      })),
+      {
+        role: 'user',
+        parts: [{ text: message }]
+      }
+    ];
 
     // Log the constructed contents array
-    console.log("Constructed contents:", contents);
+    console.log("Constructed contents:", JSON.stringify(contents, null, 2));
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
@@ -40,7 +72,7 @@ app.post('/gemini', async (req, res) => {
     const data = await response.json();
 
     // Log the response data
-    console.log("Response from API:", data);
+    console.log("Response from API:", JSON.stringify(data, null, 2));
 
     if (response.ok) {
       res.json(data);
