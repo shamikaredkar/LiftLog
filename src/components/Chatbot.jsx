@@ -95,8 +95,8 @@ export default function Chatbot() {
         Chat
       </button>
       {isOpen && (
-        <div className='bg-white border border-gray-300 rounded-lg w-80 h-96 shadow-lg flex flex-col absolute bottom-20 right-0'>
-          <section className='p-4 flex-1 flex flex-col overflow-hidden'>
+        <div className='bg-white border border-gray-300 rounded w-[500px] h-[600px] shadow-lg flex flex-col absolute bottom-20 right-0'>
+          <div className='p-4 bg-gray-200'>
             <p className='mb-2'>
               Hello! I'm your Fitness Assistant, my name is GymBro. How can I
               help you today with your workouts or fitness goals?
@@ -107,7 +107,23 @@ export default function Chatbot() {
                 Surprise me
               </button>
             </p>
-            <div className='flex mt-2'>
+          </div>
+          <div className='flex-1 flex flex-col overflow-hidden'>
+            <div className='flex-1 overflow-y-auto p-4' ref={chatContainerRef}>
+              {chatHistory.map((chatItem, index) => (
+                <div
+                  key={index}
+                  className={`p-2 my-2 rounded-lg ${
+                    chatItem.role === "user"
+                      ? "bg-blue-100 self-end"
+                      : "bg-gray-100 self-start"
+                  }`}
+                  dangerouslySetInnerHTML={{ __html: chatItem.parts }}
+                ></div>
+              ))}
+            </div>
+            {error && <p className='text-red-500 mt-2 p-4'>{error}</p>}
+            <div className='flex p-2'>
               <input
                 className='flex-1 p-2 border border-gray-300 rounded'
                 value={value}
@@ -132,25 +148,7 @@ export default function Chatbot() {
                 </button>
               )}
             </div>
-            {error && <p className='text-red-500 mt-2'>{error}</p>}
-            <div
-              className='flex-1 overflow-y-auto mt-4'
-              style={{ maxHeight: "calc(100% - 60px)" }}
-              ref={chatContainerRef}
-            >
-              {chatHistory.map((chatItem, index) => (
-                <div
-                  key={index}
-                  className={`p-2 my-2 rounded-lg ${
-                    chatItem.role === "user"
-                      ? "bg-blue-100 self-end"
-                      : "bg-gray-100 self-start"
-                  }`}
-                  dangerouslySetInnerHTML={{ __html: chatItem.parts }}
-                ></div>
-              ))}
-            </div>
-          </section>
+          </div>
         </div>
       )}
     </div>

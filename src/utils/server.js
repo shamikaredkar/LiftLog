@@ -20,7 +20,7 @@ app.use(express.json());
 const initialInstructions = `
 You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
 
-When providing information or instructions, format your response with clear bullet points where applicable.
+When providing information or instructions, format your response with clear bullet points where applicable, and keep your responses short and to the point.
 `;
 
 const isHealthOrFitnessRelated = (message) => {
@@ -30,12 +30,8 @@ const isHealthOrFitnessRelated = (message) => {
 const formatResponseText = (text) => {
   return text
     .replace(/\*\*/g, '') // Remove the markdown bold syntax
-    .replace(/^\*\s+/gm, '- ')
-    .replace(/\n/g, "<br>") // Replace newlines with HTML line breaks
-    .replace(/\*\*(.*?)\*\*/g, "<em>$1</em>") // Replace **bold** with <strong>bold</strong>
-    .replace(/^\d+\.\s+/gm, "<li>") // Replace numbered list
-    .replace(/^\-\s+/gm, "<li>") // Replace unordered list
-    .replace(/(<li>.*?<\/li>)/g, "<ul>$1</ul>"); // Replace * with - for bullet points
+    .replace(/^\*\s+/gm, '- ') // Replace * with - for bullet points
+    .replace(/\n/g, '<br>'); // Replace newlines with HTML line breaks
 };
 
 app.post('/gemini', async (req, res) => {
