@@ -1,6 +1,7 @@
 const PORT = 8000;
 const dotenv = require('dotenv');
 const path = require('path');
+const healthAndFitnessKeywords = require('./keywords'); // Adjust the path if necessary
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env')}); // Load environment variables from .env.local
 console.log(dotenv.config({ path: path.resolve(__dirname, '../../.env') }));
@@ -21,9 +22,6 @@ You are GymBro, a friendly, encouraging, and professional fitness assistant. You
 `;
 
 const isHealthOrFitnessRelated = (message) => {
-  const healthAndFitnessKeywords = [
-    'workout', 'exercise', 'fitness', 'nutrition', 'diet', 'health', 'gym', 'training', 'muscle', 'calories', 'meal plan', 'strength', 'cardio', 'wellness'
-  ];
   return healthAndFitnessKeywords.some(keyword => message.toLowerCase().includes(keyword));
 };
 
@@ -45,7 +43,7 @@ app.post('/gemini', async (req, res) => {
 
     const contents = [
       {
-        role: 'system',
+        role: 'model',
         parts: [{ text: initialInstructions }]
       },
       ...history.map(item => ({
