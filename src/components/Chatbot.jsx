@@ -146,12 +146,8 @@ export default function Chatbot() {
                       ? "bg-blue-100 self-end"
                       : "bg-gray-100 self-start"
                   }`}
-                >
-                  <p>
-                    {chatItem.role === "user" ? "You" : "GymBro"}:{" "}
-                    {chatItem.parts}
-                  </p>
-                </div>
+                  dangerouslySetInnerHTML={{ __html: chatItem.parts }}
+                ></div>
               ))}
             </div>
           </section>

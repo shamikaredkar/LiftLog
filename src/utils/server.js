@@ -3,7 +3,6 @@ import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
-import { GoogleGenerativeAI } from '@google/generative-ai'; // Ensure you have this library installed
 
 import healthAndFitnessKeywords from './keywords.js'; // Adjust the path if necessary
 
@@ -20,10 +19,23 @@ app.use(express.json());
 
 const initialInstructions = `
 You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
+
+When providing information or instructions, format your response with clear bullet points where applicable.
 `;
 
 const isHealthOrFitnessRelated = (message) => {
   return healthAndFitnessKeywords.some(keyword => message.toLowerCase().includes(keyword));
+};
+
+const formatResponseText = (text) => {
+  return text
+    .replace(/\*\*/g, '') // Remove the markdown bold syntax
+    .replace(/^\*\s+/gm, '- ')
+    .replace(/\n/g, "<br>") // Replace newlines with HTML line breaks
+    .replace(/\*\*(.*?)\*\*/g, "<em>$1</em>") // Replace **bold** with <strong>bold</strong>
+    .replace(/^\d+\.\s+/gm, "<li>") // Replace numbered list
+    .replace(/^\-\s+/gm, "<li>") // Replace unordered list
+    .replace(/(<li>.*?<\/li>)/g, "<ul>$1</ul>"); // Replace * with - for bullet points
 };
 
 app.post('/gemini', async (req, res) => {
@@ -74,7 +86,18 @@ app.post('/gemini', async (req, res) => {
     console.log("Response from API:", JSON.stringify(data, null, 2));
 
     if (response.ok) {
-      res.json(data);
+      // Format response text
+      const formattedResponse = formatResponseText(data.candidates[0].content.parts[0].text);
+
+      res.json({
+        candidates: [{
+          content: {
+            parts: [{
+              text: formattedResponse
+            }]
+          }
+        }]
+      });
     } else {
       res.status(response.status).json(data);
     }
