@@ -1,15 +1,16 @@
+import dotenv from 'dotenv';
+import path from 'path';
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
+import { GoogleGenerativeAI } from '@google/generative-ai'; // Ensure you have this library installed
+
+import healthAndFitnessKeywords from './keywords.js'; // Adjust the path if necessary
+
 const PORT = 8000;
-const dotenv = require('dotenv');
-const path = require('path');
-const healthAndFitnessKeywords = require('./keywords'); // Adjust the path if necessary
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env')}); // Load environment variables from .env.local
-console.log(dotenv.config({ path: path.resolve(__dirname, '../../.env') }));
-
-const express = require('express');
-const cors = require('cors');
-
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve('../../.env') });
 
 const apiKey = process.env.VITE_API_KEY; // Use API key from environment variables
 

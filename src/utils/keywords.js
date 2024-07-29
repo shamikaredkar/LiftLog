@@ -33,4 +33,4 @@ const healthAndFitnessKeywords = [
   'mindfulness', 'yoga practice', 'breathing exercises', 'active living', 'healthy choices', 'wellness tips', 'health advice'
 ];
 
-module.exports = healthAndFitnessKeywords;
+export default healthAndFitnessKeywords;
