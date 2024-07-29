@@ -1,9 +1,15 @@
 const PORT = 8000;
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env')}); // Load environment variables from .env.local
+console.log(dotenv.config({ path: path.resolve(__dirname, '../../.env') }))
 const express = require('express');
 const cors = require('cors');
+
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-const apiKey = "AIzaSyBinwxa4Silf9eN6MI3e0SUAnkI7DMReMk"; // Hardcoded API key
+const apiKey = process.env.VITE_API_KEY; // Use API key from environment variables
 
 const app = express();
 app.use(cors());
