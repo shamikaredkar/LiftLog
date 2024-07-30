@@ -1,6 +1,5 @@
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
-import Button from "./Button";
 
 export default function Hero() {
   const [typeEffect] = useTypewriter({
