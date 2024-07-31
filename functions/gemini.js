@@ -3,7 +3,7 @@ const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
-const healthAndFitnessKeywords = require('../keywords.js'); // Adjust path if needed
+const healthAndFitnessKeywords = require('../src/utils/keywords'); // Adjust path if needed
 
 dotenv.config();
 
