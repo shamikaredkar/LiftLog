@@ -18,11 +18,12 @@ export default function Chatbot() {
   const chatContainerRef = useRef(null);
   const chatbotRef = useRef(null);
   const surpriseOptions = [
-    "What is my workout plan for today?",
+    "How can I build muscle quickly?",
     "Can you suggest a meal plan for muscle gain?",
     "How many calories should I consume daily?",
-    "What exercises are best for strengthening my core?",
+    "How often should I change my workout routine?",
     "How do I track my progress?",
+    "What should I eat before and after a workout?",
   ];
 
   const handleSuggestionClick = (suggestion) => {

@@ -3,7 +3,7 @@ import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
-
+import { fileURLToPath } from 'url';
 import healthAndFitnessKeywords from './keywords.js'; // Adjust the path if necessary
 
 const PORT = 8000;
@@ -16,6 +16,13 @@ const apiKey = process.env.VITE_API_KEY; // Use API key from environment variabl
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 const initialInstructions = `
 You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
@@ -99,6 +106,11 @@ app.post('/gemini', async (req, res) => {
     console.error('Error details:', error);
     res.status(500).json({ error: 'Failed to process the request', details: error.message });
   }
+});
+
+// Catch-all route to serve your frontend's index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

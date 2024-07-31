@@ -34,7 +34,7 @@ const healthAndFitnessKeywords = [
   'hi', 'hello', 'hey', 'howdy', 'greetings', 'good morning', 'good afternoon', 'good evening', 
   'how are you', 'how is it going', 'how was your day', 'what’s up', 'how’s everything', 
   'how have you been', 'nice to meet you', 'good to see you', 'good to hear from you',
-  'what’s new', 'how are things', 'what’s happening', 'how can I help', 'how may I assist'
+  'what’s new', 'how are things', 'what’s happening', 'how can I help', 'how may I assist', 'progress'
 ];
 
 export default healthAndFitnessKeywords;
