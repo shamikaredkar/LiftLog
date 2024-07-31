@@ -1,9 +1,9 @@
-const express = require('express');
-const serverless = require('serverless-http');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const healthAndFitnessKeywords = require('../src/utils/keywords'); 
-
+import express from 'express';
+import serverless from 'serverless-http';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';  // Use ES module import
+import healthAndFitnessKeywords from '../keywords.js';
 
 dotenv.config();
 
@@ -58,7 +58,6 @@ app.post('/gemini', async (req, res) => {
       }
     ];
 
-    const fetch = await import('node-fetch');  // Dynamic import
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
@@ -90,4 +89,4 @@ app.post('/gemini', async (req, res) => {
   }
 });
 
-module.exports.handler = serverless(app);
+export const handler = serverless(app);  // Use ES module export
