@@ -30,7 +30,7 @@ export default function Generator({
 }) {
   const [showmodal, setShowModal] = useState(false);
   function toggleModal() {
-    setShowModal(!showmodal); //
+    setShowModal(!showmodal);
   }
   function updateMuscles(muscleGroup) {
     if (poison !== "individual") {

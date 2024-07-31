@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimesCircle,
   faCircleChevronRight,
-} from "@fortawesome/free-solid-svg-icons"; // Correct icon import
-import "./Chatbot.css"; // Import the CSS file
+} from "@fortawesome/free-solid-svg-icons";
+import "./Chatbot.css";
 import chatbotAnimation from "../assets/chatbotAnimation.json";
 import Lottie from "lottie-react";
 import "react-tooltip/dist/react-tooltip.css";
@@ -16,8 +16,7 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef(null);
-  const chatbotRef = useRef(null); // Create a ref for the chatbot container
-
+  const chatbotRef = useRef(null);
   const surpriseOptions = [
     "What is my workout plan for today?",
     "Can you suggest a meal plan for muscle gain?",
@@ -63,7 +62,6 @@ export default function Chatbot() {
 
         if (data.candidates && data.candidates.length > 0) {
           const generatedText = data.candidates[0].content.parts[0].text;
-          // Replace loading message with AI response
           setChatHistory((oldChatHistory) => [
             ...oldChatHistory.slice(0, -1),
             { role: "model", parts: generatedText },

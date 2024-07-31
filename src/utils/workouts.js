@@ -39,15 +39,6 @@ export const WORKOUTS = {
     }
 }
 
-//write a function that flattens this thing with all the variants
-//if athome, then have to specify equipment (if required otherwise bodyweight)
-//add instructions for substitutions (at home substitutions) for weights etc
-//variant is just going to be gym (forget about home stuff as long as one of the variants is
-//make it so that you can't get the same varient in a single workout (maybe)
-//add all the other variants to the subsubstitute list
-//pick a random exercise
-//for non-members, exclude all the at home specific exercises (anything particularly pussy like a lot of the bodyweight stuff)
-
 const bw_exercises = {
 
 }
@@ -84,7 +75,7 @@ export const EXERCISES = {
             horizontal: 'Press your hands away from you at a 45 degree angle from horizontal.',
             decline: 'Press your hands away from you at a -30 degree angle below horizontal.'
         },
-        unit: 'reps', //vs duration        
+        unit: 'reps',       
         muscles: ['chest'],
         description: 'Place a light, weighted plate between the palms of your hands (as if your were praying), and while keeping your scapula retracted, press your hands together while pushing the plate away from you.',
         substitutes: ['palm prayer press']

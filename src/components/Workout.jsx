@@ -1,7 +1,7 @@
 import React from "react";
 import SectionWrapper from "./SectionWrapper";
 import ExerciseCard from "./ExerciseCard";
-import { exportWorkoutAsPDF } from "../utils/exportWorkoutAsPdf"; // Adjust the path if needed
+import { exportWorkoutAsPDF } from "../utils/exportWorkoutAsPdf";
 
 export default function Workout({ workout, muscleGroups }) {
   return (
@@ -15,13 +15,9 @@ export default function Workout({ workout, muscleGroups }) {
           {workout.map((exercise, index) => (
             <ExerciseCard index={index} exercise={exercise} key={index} />
           ))}
-        </div>
-
-        {/* Add the Export as PDF Button */}
-        <div className='mt-8'>
           <button
             onClick={() => exportWorkoutAsPDF(workout, muscleGroups)}
-            className='export-pdf-btn bg-red-500 text-white px-4 py-2 rounded-md'
+            className=''
           >
             Export as PDF
           </button>

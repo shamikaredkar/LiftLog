@@ -29,9 +29,9 @@ const isHealthOrFitnessRelated = (message) => {
 
 const formatResponseText = (text) => {
   return text
-    .replace(/\*\*/g, '') // Remove the markdown bold syntax
-    .replace(/^\*\s+/gm, '- ') // Replace * with - for bullet points
-    .replace(/\n/g, '<br>'); // Replace newlines with HTML line breaks
+    .replace(/\*\*/g, '') 
+    .replace(/^\*\s+/gm, '- ') 
+    .replace(/\n/g, '<br>'); 
 };
 
 app.post('/gemini', async (req, res) => {
@@ -78,11 +78,9 @@ app.post('/gemini', async (req, res) => {
 
     const data = await response.json();
 
-    // Log the response data
     console.log("Response from API:", JSON.stringify(data, null, 2));
 
     if (response.ok) {
-      // Format response text
       const formattedResponse = formatResponseText(data.candidates[0].content.parts[0].text);
 
       res.json({
