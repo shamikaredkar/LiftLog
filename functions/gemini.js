@@ -1,21 +1,11 @@
-import express from 'express';
-import serverless from 'serverless-http';
-import bodyParser from 'body-parser';
+import axios from 'axios';
 import dotenv from 'dotenv';
-import axios from 'axios'; // Import axios
-import healthAndFitnessKeywords from '../src/utils/keywords';
+import healthAndFitnessKeywords from '../src/utils/keywords'; // Adjust the path if necessary
 
 dotenv.config();
 
-const apiKey = process.env.VITE_API_KEY;
-
-const app = express();
-app.use(bodyParser.json());
-
 const initialInstructions = `
-You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
-
-When providing information or instructions, format your response with clear bullet points where applicable, and keep your responses short and to the point.
+You are GymBro, a friendly, encouraging, and professional fitness assistant...
 `;
 
 const isHealthOrFitnessRelated = (message) => {
@@ -29,20 +19,24 @@ const formatResponseText = (text) => {
     .replace(/\n/g, '<br>'); 
 };
 
-app.post('/gemini', async (req, res) => {
+export const handler = async (event) => {
   try {
-    const { history, message } = req.body;
+    // Check if the request body exists
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Request body is missing' }),
+      };
+    }
+
+    const { history, message } = JSON.parse(event.body);
+    const apiKey = process.env.VITE_API_KEY;
 
     if (!isHealthOrFitnessRelated(message)) {
-      return res.json({
-        candidates: [{
-          content: {
-            parts: [{
-              text: "I'm sorry, I can only answer questions related to health and fitness. Please ask me something about workouts, nutrition, or general fitness."
-            }]
-          }
-        }]
-      });
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Message not related to health or fitness' }),
+      };
     }
 
     const contents = [
@@ -60,38 +54,24 @@ app.post('/gemini', async (req, res) => {
       }
     ];
 
-    // Use axios to make the POST request
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
       { contents },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      { headers: { 'Content-Type': 'application/json' } }
     );
 
-    const data = response.data;
+    const formattedResponse = formatResponseText(response.data.candidates[0].content.parts[0].text);
 
-    if (response.status === 200) {
-      const formattedResponse = formatResponseText(data.candidates[0].content.parts[0].text);
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: formattedResponse }),
+    };
 
-      res.json({
-        candidates: [{
-          content: {
-            parts: [{
-              text: formattedResponse
-            }]
-          }
-        }]
-      });
-    } else {
-      res.status(response.status).json(data);
-    }
   } catch (error) {
     console.error('Error details:', error);
-    res.status(500).json({ error: 'Failed to process the request', details: error.message });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to process the request', details: error.message }),
+    };
   }
-});
-
-export const handler = serverless(app);
+};

@@ -49,32 +49,38 @@ export default function Chatbot() {
       const options = {
         method: "POST",
         body: JSON.stringify({
-          history: chatHistory,
+          history: chatHistory.map((item) => ({
+            role: item.role,
+            parts: item.parts,
+          })),
           message: value,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       };
-      // Simulate a delay before fetching the AI response
-      setTimeout(async () => {
-        const response = await fetch("/.netlify/functions/gemini", options);
-        const data = await response.json();
 
-        if (data.candidates && data.candidates.length > 0) {
-          const generatedText = data.candidates[0].content.parts[0].text;
-          setChatHistory((oldChatHistory) => [
-            ...oldChatHistory.slice(0, -1),
-            { role: "model", parts: generatedText },
-          ]);
-        } else {
-          setError("No response from the model.");
-        }
+      const response = await fetch("/.netlify/functions/gemini", options);
 
-        setLoading(false);
-      }, 500); // 1-second delay
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.message) {
+        setChatHistory((oldChatHistory) => [
+          ...oldChatHistory.slice(0, -1),
+          { role: "model", parts: data.message },
+        ]);
+      } else {
+        setError("No response from the model.");
+        setChatHistory((oldChatHistory) => oldChatHistory.slice(0, -1)); // Remove the loader
+      }
     } catch (e) {
       setError("Something went wrong");
+      setChatHistory((oldChatHistory) => oldChatHistory.slice(0, -1)); // Remove the loader
+    } finally {
       setLoading(false);
     }
   };
