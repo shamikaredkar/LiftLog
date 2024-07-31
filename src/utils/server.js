@@ -41,7 +41,7 @@ const formatResponseText = (text) => {
     .replace(/\n/g, '<br>'); 
 };
 
-app.post('https://lift-log-shamika-redkar.vercel.app/gemini', async (req, res) => {
+app.post('/gemini', async (req, res) => {
   try {
     const { history, message } = req.body;
 
