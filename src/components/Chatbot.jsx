@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons"; // Correct icon import
+import {
+  faTimesCircle,
+  faCircleChevronRight,
+} from "@fortawesome/free-solid-svg-icons"; // Correct icon import
 import "./Chatbot.css"; // Import the CSS file
+import chatbotAnimation from "../assets/chatbotAnimation.json";
+import Lottie from "lottie-react";
 
 export default function Chatbot() {
   const [error, setError] = useState("");
@@ -56,7 +61,6 @@ export default function Chatbot() {
 
       if (data.candidates && data.candidates.length > 0) {
         const generatedText = data.candidates[0].content.parts[0].text;
-
         // Replace loading message with AI response
         setChatHistory((oldChatHistory) => [
           ...oldChatHistory.slice(0, -1),
@@ -79,7 +83,7 @@ export default function Chatbot() {
       {
         role: "model",
         parts:
-          "Hello! I'm your Fitness Assistant, my name is GymBro. How can I help you today with your workouts or fitness goals?",
+          "Hi, I'm GymBro! Your personal fitness assistant. How may I help you today?",
       },
     ]);
   };
@@ -90,8 +94,7 @@ export default function Chatbot() {
       setChatHistory([
         {
           role: "model",
-          parts:
-            "Hello! I'm your Fitness Assistant, my name is GymBro. How can I help you today with your workouts or fitness goals?",
+          parts: "Hi there! I'm GymBro, your go-to Fitness Assistant.",
         },
       ]);
     }
@@ -105,12 +108,9 @@ export default function Chatbot() {
   }, [chatHistory]);
 
   return (
-    <div className='fixed bottom-5 right-5 z-50'>
-      <button
-        className='bg-blue-500 text-white rounded-full w-16 h-16 text-lg shadow-lg'
-        onClick={toggleChat}
-      >
-        Chat
+    <div className='px-6 fixed bottom-5 right-5 z-50'>
+      <button className='rounded-full w-14 h-14 shadow-lg' onClick={toggleChat}>
+        <Lottie animationData={chatbotAnimation} loop={true} autoplay={true} />
       </button>
       {isOpen && (
         <div className='bg-white border border-gray-300 rounded-lg w-[500px] h-[600px] shadow-lg flex flex-col absolute bottom-20 right-0'>
@@ -138,12 +138,12 @@ export default function Chatbot() {
               <input
                 className='flex-1 p-2 border border-gray-300 rounded-lg'
                 value={value}
-                placeholder='Ask me anything about fitness'
+                placeholder='How may I help you today?'
                 onChange={(e) => setValue(e.target.value)}
               />
               {!error && (
                 <button
-                  className='ml-2 px-2 text-white rounded-lg'
+                  className='ml-2 px-2 text-white'
                   onClick={getResponse}
                   disabled={loading}
                 >
@@ -155,11 +155,12 @@ export default function Chatbot() {
                 </button>
               )}
               {error && (
-                <button
-                  className='ml-2 px-4 py-2 bg-red-500 text-white rounded'
-                  onClick={clear}
-                >
-                  Clear
+                <button className='ml-2 px-2 text-white' onClick={clear}>
+                  <FontAwesomeIcon
+                    icon={faTimesCircle}
+                    style={{ color: "#751006" }}
+                    size='2xl'
+                  />
                 </button>
               )}
             </div>
