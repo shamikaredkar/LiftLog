@@ -3,7 +3,7 @@ import serverless from 'serverless-http';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import axios from 'axios'; // Import axios
-import healthAndFitnessKeywords from '../keywords.js';
+import healthAndFitnessKeywords from '../src/utils/keywords';
 
 dotenv.config();
 
