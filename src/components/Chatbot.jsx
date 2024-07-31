@@ -7,7 +7,7 @@ import {
 import "./Chatbot.css"; // Import the CSS file
 import chatbotAnimation from "../assets/chatbotAnimation.json";
 import Lottie from "lottie-react";
-import profilePic from "../../public/gym.png"; // Import the profile picture
+import "react-tooltip/dist/react-tooltip.css";
 
 export default function Chatbot() {
   const [error, setError] = useState("");
@@ -33,7 +33,7 @@ export default function Chatbot() {
 
   const getResponse = async () => {
     if (!value) {
-      setError("Error! Please ask a question");
+      setError("Please ask a question");
       return;
     }
 
