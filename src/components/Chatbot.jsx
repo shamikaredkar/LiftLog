@@ -25,10 +25,8 @@ export default function Chatbot() {
     "How do I track my progress?",
   ];
 
-  const surprise = () => {
-    const randomValue =
-      surpriseOptions[Math.floor(Math.random() * surpriseOptions.length)];
-    setValue(randomValue);
+  const handleSuggestionClick = (suggestion) => {
+    setValue(suggestion);
   };
 
   const getResponse = async () => {
@@ -117,7 +115,7 @@ export default function Chatbot() {
         <Lottie animationData={chatbotAnimation} loop={true} autoplay={true} />
       </button>
       {isOpen && (
-        <div className='bg-white border border-gray-300 rounded-lg w-[500px] h-[600px] shadow-lg flex flex-col absolute bottom-20 right-0'>
+        <div className='bg-white border border-gray-300 rounded-lg w-[600px] h-[700px] shadow-lg flex flex-col absolute bottom-20 right-0'>
           <div className='flex items-center pt-4 pb-1 '>
             <div className='ml-4 flex items-center'>
               <span className='font-bold text-lg'>GymBro</span>
@@ -143,6 +141,20 @@ export default function Chatbot() {
               })}
             </div>
             {error && <p className='text-red-500 mt-2 p-4'>{error}</p>}
+
+            {/* Suggestions Section */}
+            <div className='flex flex-col p-4 space-y-2 overflow-y-auto max-h-32'>
+              {surpriseOptions.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSuggestionClick(option)}
+                  className='text-left bg-gray-100 p-2 rounded-lg shadow-md hover:bg-gray-200'
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+
             <div className='flex p-4'>
               <input
                 className='flex-1 p-2 border border-gray-300 rounded-lg'
