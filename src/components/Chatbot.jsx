@@ -58,7 +58,7 @@ export default function Chatbot() {
       };
       // Simulate a delay before fetching the AI response
       setTimeout(async () => {
-        const response = await fetch("/gemini", options);
+        const response = await fetch("/.netlify/functions/gemini", options);
         const data = await response.json();
 
         if (data.candidates && data.candidates.length > 0) {
