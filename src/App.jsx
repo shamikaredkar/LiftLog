@@ -52,7 +52,7 @@ function App() {
         />
         {workout && (
           <div className='mt-32'>
-            <Workout workout={workout} />
+            <Workout workout={workout} muscleGroups={muscles} />
           </div>
         )}
         {showModal && (
