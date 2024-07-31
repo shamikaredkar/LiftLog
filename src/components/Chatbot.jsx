@@ -7,6 +7,7 @@ import {
 import "./Chatbot.css"; // Import the CSS file
 import chatbotAnimation from "../assets/chatbotAnimation.json";
 import Lottie from "lottie-react";
+import profilePic from "../../public/gym.png"; // Import the profile picture
 
 export default function Chatbot() {
   const [error, setError] = useState("");
@@ -56,22 +57,26 @@ export default function Chatbot() {
           "Content-Type": "application/json",
         },
       };
-      const response = await fetch("http://localhost:8000/gemini", options);
-      const data = await response.json();
+      // Simulate a delay before fetching the AI response
+      setTimeout(async () => {
+        const response = await fetch("http://localhost:8000/gemini", options);
+        const data = await response.json();
 
-      if (data.candidates && data.candidates.length > 0) {
-        const generatedText = data.candidates[0].content.parts[0].text;
-        // Replace loading message with AI response
-        setChatHistory((oldChatHistory) => [
-          ...oldChatHistory.slice(0, -1),
-          { role: "model", parts: generatedText },
-        ]);
-      } else {
-        setError("No response from the model.");
-      }
+        if (data.candidates && data.candidates.length > 0) {
+          const generatedText = data.candidates[0].content.parts[0].text;
+          // Replace loading message with AI response
+          setChatHistory((oldChatHistory) => [
+            ...oldChatHistory.slice(0, -1),
+            { role: "model", parts: generatedText },
+          ]);
+        } else {
+          setError("No response from the model.");
+        }
+
+        setLoading(false);
+      }, 500); // 1-second delay
     } catch (e) {
       setError("Something went wrong");
-    } finally {
       setLoading(false);
     }
   };
@@ -82,8 +87,7 @@ export default function Chatbot() {
     setChatHistory([
       {
         role: "model",
-        parts:
-          "Hi, I'm GymBro! Your personal fitness assistant. How may I help you today?",
+        parts: "Hi there! I'm your go-to Fitness Assistant.",
       },
     ]);
   };
@@ -94,7 +98,7 @@ export default function Chatbot() {
       setChatHistory([
         {
           role: "model",
-          parts: "Hi there! I'm GymBro, your go-to Fitness Assistant.",
+          parts: "Hi there! I'm your go-to Fitness Assistant.",
         },
       ]);
     }
@@ -114,6 +118,11 @@ export default function Chatbot() {
       </button>
       {isOpen && (
         <div className='bg-white border border-gray-300 rounded-lg w-[500px] h-[600px] shadow-lg flex flex-col absolute bottom-20 right-0'>
+          <div className='flex items-center pt-4 pb-1 '>
+            <div className='ml-4 flex items-center'>
+              <span className='font-bold text-lg'>GymBro</span>
+            </div>
+          </div>
           <div className='flex-1 flex flex-col overflow-hidden'>
             <div className='flex-1 overflow-y-auto p-4' ref={chatContainerRef}>
               {chatHistory.map((chatItem, index) => {
@@ -121,9 +130,9 @@ export default function Chatbot() {
                 return (
                   <div
                     key={index}
-                    className={`p-2 my-2 rounded-lg ${
+                    className={`block max-w-max p-2 my-2 rounded-lg ${
                       chatItem.role === "user"
-                        ? "bg-blue-100 self-end"
+                        ? "bg-red-100 self-end text-right ml-auto"
                         : !isLoading
                         ? "bg-gray-100 self-start"
                         : ""

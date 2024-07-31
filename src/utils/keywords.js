@@ -30,7 +30,11 @@ const healthAndFitnessKeywords = [
   'fitness journal', 'workout buddy', 'accountability', 'fitness community', 'support system', 'motivation techniques', 
   'exercise adherence', 'goal setting', 'SMART goals', 'fitness plans', 'customized workouts', 'training programs', 
   'nutrition plans', 'supplement plans', 'wellness routines', 'stress relief', 'relaxation techniques', 'meditation', 
-  'mindfulness', 'yoga practice', 'breathing exercises', 'active living', 'healthy choices', 'wellness tips', 'health advice'
+  'mindfulness', 'yoga practice', 'breathing exercises', 'active living', 'healthy choices', 'wellness tips', 'health advice', // Add greeting and small talk keywords
+  'hi', 'hello', 'hey', 'howdy', 'greetings', 'good morning', 'good afternoon', 'good evening', 
+  'how are you', 'how is it going', 'how was your day', 'what’s up', 'how’s everything', 
+  'how have you been', 'nice to meet you', 'good to see you', 'good to hear from you',
+  'what’s new', 'how are things', 'what’s happening', 'how can I help', 'how may I assist'
 ];
 
 export default healthAndFitnessKeywords;
