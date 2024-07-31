@@ -2,7 +2,7 @@ import express from 'express';
 import serverless from 'serverless-http';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';  // Use ES module import
+import axios from 'axios'; // Import axios
 import healthAndFitnessKeywords from '../keywords.js';
 
 dotenv.config();
@@ -13,7 +13,9 @@ const app = express();
 app.use(bodyParser.json());
 
 const initialInstructions = `
-You are GymBro, a friendly, encouraging, and professional fitness assistant...
+You are GymBro, a friendly, encouraging, and professional fitness assistant. You assist users with workout routines, provide nutrition advice, and answer health-related or gym-related questions. Always respond with a friendly and encouraging tone. Remember user preferences, fitness goals, and previous interactions to provide personalized advice. You are restricted to answering only health and fitness-related questions.
+
+When providing information or instructions, format your response with clear bullet points where applicable, and keep your responses short and to the point.
 `;
 
 const isHealthOrFitnessRelated = (message) => {
@@ -36,7 +38,7 @@ app.post('/gemini', async (req, res) => {
         candidates: [{
           content: {
             parts: [{
-              text: "I'm sorry, I can only answer questions related to health and fitness..."
+              text: "I'm sorry, I can only answer questions related to health and fitness. Please ask me something about workouts, nutrition, or general fitness."
             }]
           }
         }]
@@ -58,17 +60,20 @@ app.post('/gemini', async (req, res) => {
       }
     ];
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ contents }),
-    });
+    // Use axios to make the POST request
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
+      { contents },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-    const data = await response.json();
+    const data = response.data;
 
-    if (response.ok) {
+    if (response.status === 200) {
       const formattedResponse = formatResponseText(data.candidates[0].content.parts[0].text);
 
       res.json({
@@ -89,4 +94,4 @@ app.post('/gemini', async (req, res) => {
   }
 });
 
-export const handler = serverless(app);  // Use ES module export
+export const handler = serverless(app);
