@@ -3,6 +3,8 @@
 
 ## Overview
 
+https://github.com/user-attachments/assets/e8990577-397d-4fd0-a04f-b6e7e9a53c90
+
 LiftLog is a comprehensive fitness application designed to assist users in generating personalized workouts that fit their goals. With a user-friendly interface and an integrated chatbot named GymBro, LiftLog offers personalized fitness advice, workout plan generation, and the ability to export workout routines as PDF files for offline usage. 
 
 ## Features
