@@ -34,6 +34,7 @@ LiftLog is a comprehensive fitness application designed to assist users in gener
 - [![Vite][Vite]][Vite-url]
 - [![Netlify][Netlify]][Netlify-url]
 - [![Gemini][Gemini]][Gemini-url]
+- [![Tailwind][Tailwind]][Tailwind-url]
 
 ## Project Directory
  ```
@@ -86,4 +87,6 @@ LiftLog
 [Netlify-url]: https://www.netlify.com/
 [Gemini]: https://img.shields.io/badge/Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white
 [Gemini-url]: https://cloud.google.com/vertex-ai/docs/generative-ai/gemini
+[Tailwind]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
 
