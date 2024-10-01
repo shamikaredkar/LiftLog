@@ -143,7 +143,7 @@ export default function Chatbot() {
           />
         </button>
         {isOpen && (
-          <div className='bg-white border border-gray-300 rounded-lg w-[600px] h-[700px] shadow-lg flex flex-col absolute bottom-20 right-0'>
+          <div className='bg-white border border-gray-300 rounded-lg w-full sm:w-[300px] md:w-[500px] lg:w-[700px] xl:w-[800px] h-[300px] sm:h-[500px] md:h-[700px] lg:h-[800px] shadow-lg flex flex-col absolute bottom-20 right-0'>
             <div className='flex items-center pt-4 pb-1 '>
               <div className='ml-4 flex items-center'>
                 <span className='font-bold text-lg'>GymBro</span>
